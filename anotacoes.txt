@@ -1,0 +1,18 @@
+usando jest {
+   yarn add -D jest @types/jest @testing-library/react @testing-library/jest-dom @testing-library/user-event
+
+   possíveis erros {
+      usando jest.config.ts: talvez nao reconheça o ts-node instalado globalmente, para isso tem que instalar local como devDependence
+      erro jest-environment-jsdom nao e instalado por padrão, tem que instalar junto: yarn add -D jest-environment-jsdom
+
+      nao reconhecendo funções do testing-library {
+         criar arquivo setupTests.ts com  {
+            // jest-dom adds custom jest matchers for asserting on DOM nodes.
+            // allows you to do things like:
+            // expect(element).toHaveTextContent(/react/i)
+            // learn more: https://github.com/testing-library/jest-dom
+            import '@testing-library/jest-dom';
+         } na pasta src ou na raiz do projeto.
+      }
+   }
+}
