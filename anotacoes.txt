@@ -13,6 +13,8 @@ usando jest {
             // learn more: https://github.com/testing-library/jest-dom
             import '@testing-library/jest-dom';
          } na pasta src ou na raiz do projeto.
+
+         caso nao funcionar tera que importar o @testing-library/jest-dom em todos os arquivos de teste
       }
    }
 }

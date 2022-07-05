@@ -30,9 +30,10 @@
         "semi": [
             "error",
             "always"
+        ],
+        "quotes": [
+            "warn",
+            "single"
         ]
-    },
-    "ignorePatterns": [
-        "jest.config.ts"
-    ]
+    }
 }

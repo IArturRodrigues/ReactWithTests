@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+   @apply font-poppins bg-app-blue border-2 border-solid border-app-black
+}
+
+#root {
+   @apply flex flex-col min-h-screen
+}
