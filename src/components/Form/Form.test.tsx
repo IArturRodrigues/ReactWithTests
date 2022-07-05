@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 
 import Form from './index';
@@ -57,5 +57,54 @@ describe('Form component', () => {
    
       // garantir que o input nao tenha um valor
       expect(input).toHaveValue('');
+   });
+
+   test('nomes duplicados nao podem ser adicionados a lista', () => {
+      fireEvent.change(input, {
+         target: {
+            value: 'Artur'
+         }
+      });
+      fireEvent.click(button);
+
+      fireEvent.change(input, {
+         target: {
+            value: 'Artur'
+         }
+      });
+      fireEvent.click(button);
+      
+      const errorMessage = screen.getByRole('alert');
+
+      expect(errorMessage.textContent).toBe('Nomes duplicados nao sao permitidos!');
+   });
+
+   test('a mensagem de erro deve sumir apos os timers', () => {
+      jest.useFakeTimers();
+
+      fireEvent.change(input, {
+         targe: {
+            value: 'Artur'
+         }
+      });
+      fireEvent.click(button);
+
+      fireEvent.change(input, {
+         targe: {
+            value: 'Artur'
+         }
+      });
+      fireEvent.click(button);
+
+      let errorMessage = screen.queryByRole('alert');
+      if (!errorMessage) return;
+      expect(errorMessage).toBeInTheDocument();
+
+      act(() => {
+         jest.runAllTimers();
+      });
+
+      errorMessage = screen.queryByRole('alert');
+      expect(errorMessage).toBeNull();
    });
 });

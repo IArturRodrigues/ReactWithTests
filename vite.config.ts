@@ -10,6 +10,6 @@ export default defineConfig({
             plugins: ['babel-plugin-macros', 'babel-plugin-styled-components']
          }
       }),
-      tsconfigPaths()
+      tsconfigPaths({ root: '.' })
    ]
 });

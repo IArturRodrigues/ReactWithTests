@@ -1,5 +1,6 @@
+import { useAddParticipant } from '@hooks/useAddParticipant';
+import { useErrorMessage } from '@hooks/useErrorMessage';
 import { useRef, useState } from 'react';
-import { useAddParticipant } from '../../hooks/useAddParticipant';
 import { Form as SForm } from './Form';
 
 export function Form (): JSX.Element {
@@ -8,6 +9,8 @@ export function Form (): JSX.Element {
    const inputRef = useRef<HTMLInputElement>(null);
 
    const addInList = useAddParticipant();
+
+   const errorMessage = useErrorMessage();
 
    function addParticipant (event: React.FormEvent<HTMLFormElement>) {
       event.preventDefault();
@@ -30,6 +33,7 @@ export function Form (): JSX.Element {
          <SForm.Button disabled={text.length === 0 ?? false} >
             Adicionar
          </SForm.Button>
+         {errorMessage && <p role='alert'>{errorMessage}</p>}
       </SForm>
    );
 }

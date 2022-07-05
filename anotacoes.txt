@@ -5,6 +5,35 @@ usando jest {
       usando jest.config.ts: talvez nao reconheça o ts-node instalado globalmente, para isso tem que instalar local como devDependence
       erro jest-environment-jsdom nao e instalado por padrão, tem que instalar junto: yarn add -D jest-environment-jsdom
 
+      usando tspaths {
+         tem que instalar o plugin vite-tsconfig-paths e nas configs do vite colocar {
+            import tsconfigPaths from 'vite-tsconfig-paths';
+
+            export default defineConfigs({
+               plugins: [
+                  ...,
+                  tsconfigPaths() // opcional { root: '.' } dentro dos ()
+               ]
+            });
+         }
+
+         configurando o jest {
+            tem que instalar a lib ts-jest, também para colocar nas configs de preset do jest
+            usando tspaths {
+               import { pathsToModuleNameMapper } from 'ts-jest';
+               import { compilerOptions }from './tsconfig.json';
+
+               export default {
+                  ...,
+                  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>' }),
+                  ...,
+                  preset: ts-jest,
+                  ...
+               }
+            }
+         }
+      }
+
       nao reconhecendo funções do testing-library {
          criar arquivo setupTests.ts com  {
             // jest-dom adds custom jest matchers for asserting on DOM nodes.
@@ -17,4 +46,8 @@ usando jest {
          caso nao funcionar tera que importar o @testing-library/jest-dom em todos os arquivos de teste
       }
    }
+}
+
+sobre testes {
+   Cada teste deve testar apenas 1 funcionalidade, só deve falhar por um único motivo que é não cumprir o requisito do teste. Não tente fazer mais do que apenas 1 teste dentro de cada bloco.
 }
