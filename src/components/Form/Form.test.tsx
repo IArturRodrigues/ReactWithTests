@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { RecoilRoot } from 'recoil';
 
 import Form from './index';
 
@@ -7,8 +8,13 @@ let input: HTMLElement;
 let button: HTMLElement;
 
 describe('Form component', () => {
-   beforeAll(() => {
-      render(<Form />);
+   beforeEach(() => {
+      // o recoil root agora e colocado por conta do hook criado utilizando o recoil
+      render(
+         <RecoilRoot>
+            <Form />
+         </RecoilRoot>
+      );
 
       // encontrar no DOM o input
       input = screen.getByPlaceholderText('Insira os nomes dos participantes');
