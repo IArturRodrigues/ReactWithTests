@@ -34,6 +34,13 @@
         "quotes": [
             "warn",
             "single"
+        ],
+        "no-trailing-spaces": [
+            "error",
+            {
+                "skipBlankLines": true,
+                "ignoreComments": true
+            }
         ]
     }
 }
