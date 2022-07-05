@@ -1,11 +1,8 @@
-import { Form, Header } from '@components';
+import Router from './App.routes';
 
 function App () {
    return (
-      <>
-         <Header />
-         <Form />
-      </>
+      <Router />
    );
 }
 
