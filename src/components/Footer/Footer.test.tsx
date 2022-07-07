@@ -11,10 +11,17 @@ jest.mock('@hooks/useParticipantList', () => {
 });
 
 const mockNavigate = jest.fn();
+const mockRaffle = jest.fn();
 
 jest.mock('react-router-dom', () => {
    return {
       useNavigate: () => mockNavigate
+   };
+});
+
+jest.mock('@hooks/useShuffle', () => {
+   return {
+      useShuffle: () => mockRaffle
    };
 });
 
@@ -61,6 +68,7 @@ describe('Footer component', () => {
    
          expect(mockNavigate).toHaveBeenCalledTimes(1);
          expect(mockNavigate).toHaveBeenCalledWith('/sorteio');
+         expect(mockRaffle).toHaveBeenCalledTimes(1);
       });
    });
 });

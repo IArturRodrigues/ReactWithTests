@@ -1,4 +1,5 @@
 import { useParticipantList } from '@hooks/useParticipantList';
+import { useShuffle } from '@hooks/useShuffle';
 import { useNavigate } from 'react-router-dom';
 import { Footer as SFooter } from './Footer';
 
@@ -7,7 +8,10 @@ function Footer (): JSX.Element {
 
    const navigate = useNavigate();
 
+   const raffle = useShuffle();
+
    function start () {
+      raffle();
       navigate('/sorteio');
    }
 
