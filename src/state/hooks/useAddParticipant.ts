@@ -1,11 +1,12 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { errorState, participantListState } from '@state/atom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { errorState, participantListState } from '../atom';
 
 const FIVE_SECONDS = 5000;
 
 export const useAddParticipant = () => {
-   const setList = useSetRecoilState(participantListState);
-   const list = useRecoilValue(participantListState);
+   const [list, setList] = useRecoilState(participantListState);
+   // const setList = useSetRecoilState(participantListState);
+   // const list = useRecoilValue(participantListState);
    const setError = useSetRecoilState(errorState);
    return (participantName: string) => {
       if (list.includes(participantName)) {

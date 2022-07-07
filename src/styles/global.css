@@ -9,3 +9,15 @@ html {
 #root {
    @apply flex flex-col min-h-screen
 }
+
+section {
+   @apply w-full text-center max-w-[56.25rem]
+}
+
+h2 {
+   @apply font-semibold text-[2rem] mb-9 text-app-blue
+}
+
+ul li {
+   @apply text-lg font-light my-[.5rem]
+}

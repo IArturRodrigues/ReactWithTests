@@ -1,6 +1,6 @@
 import SHeader from './Header';
 
-export function Header (): JSX.Element {
+function Header (): JSX.Element {
    return (
       <SHeader>
          <SHeader.Logo aria-label='Logo do sorteador' role="img"></SHeader.Logo>

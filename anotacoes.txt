@@ -43,11 +43,69 @@ usando jest {
             import '@testing-library/jest-dom';
          } na pasta src ou na raiz do projeto.
 
-         caso nao funcionar tera que importar o @testing-library/jest-dom em todos os arquivos de teste
+         depois disso ir nas configurações do jest {
+            // jest.config.ts
+
+            setupFilesAfterEnv: ['<rootDir>/path/to/setupFile.ext']
+         }
+
+         caso dê algum erro usando typescript colocar também o caminho do setup de testes no array de includes
+
+         // caso nao funcionar tera que importar o @testing-library/jest-dom em todos os arquivos de teste
       }
    }
 }
 
 sobre testes {
    Cada teste deve testar apenas 1 funcionalidade, só deve falhar por um único motivo que é não cumprir o requisito do teste. Não tente fazer mais do que apenas 1 teste dentro de cada bloco.
+
+   usando mocks (valores de mentira) {
+      import valorASerMockado from 'caminho/ate/arquivo/para/mockar';
+
+      jest.mock('caminho/ate/arquivo/para/mockar', () => {
+         return {
+            valorASerMockado: jest.fn() // diz que ele se comporta como uma função (somente quando o valor retornado pela função mockada nao for outra função)
+         };
+      });
+
+      const mockFunção = jest.fn();
+
+      jest.mock('path/to/file', () => {
+         return {
+            funçãoASerMockada: () => mockFunção // quando uma função retorna outra o mock deve ser feito dessa forma
+         };
+      });
+
+      describe('testando algo', () => {
+         beforeEach(() => {
+            // quando o teste depende do mock ele deve ser o primeiro a ser executado.
+            // ex quando uma lista precisa ser renderizada com 2 itens o mock deve vir antes da renderização.
+            // isso para uma funcionalidade que nao tenha as opções de estado padrão do react.
+            (valorASerMockado as jest.Mock).mockReturnValue(valorDesejadoParaOTeste);
+
+            render(<Component />);
+         });
+         it('testando funcionalidade', () => {
+            expect(algumaCoisa).toHaveLength(tamanhoDoArray);
+         });
+      });
+   }
+
+   escopo de testes {
+      // arquivo.test.ts
+
+      beforeEach(() => {
+         // vai funcionar para todos os testes do arquivo
+      });
+
+      test('testando alguma coisa', () => {});
+
+      describe('testando um conjunto de coisas', () => {
+         beforeEach(() => {
+            // vai funcionar somente para os testes dentro do describe
+         });
+      });
+   }
+
+   teste de snapshot {}
 }

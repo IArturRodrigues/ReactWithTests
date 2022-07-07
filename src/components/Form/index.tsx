@@ -3,7 +3,9 @@ import { useErrorMessage } from '@hooks/useErrorMessage';
 import { useRef, useState } from 'react';
 import { Form as SForm } from './Form';
 
-export function Form (): JSX.Element {
+// import Card from '../Card';
+
+function Form (): JSX.Element {
    const [text, setText] = useState<string>('');
 
    const inputRef = useRef<HTMLInputElement>(null);
@@ -33,7 +35,7 @@ export function Form (): JSX.Element {
          <SForm.Button disabled={text.length === 0 ?? false} >
             Adicionar
          </SForm.Button>
-         {errorMessage && <p role='alert'>{errorMessage}</p>}
+         {errorMessage && <SForm.AlertError role='alert'>{errorMessage}</SForm.AlertError>}
       </SForm>
    );
 }

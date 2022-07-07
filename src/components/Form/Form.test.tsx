@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 
@@ -101,6 +100,7 @@ describe('Form component', () => {
       expect(errorMessage).toBeInTheDocument();
 
       act(() => {
+         // quando usando testes que mudam o estado no React, tem que ficar dentro da função act
          jest.runAllTimers();
       });
 
