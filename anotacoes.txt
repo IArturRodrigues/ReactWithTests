@@ -107,5 +107,15 @@ sobre testes {
       });
    }
 
-   teste de snapshot {}
+   teste de snapshot {
+      sao testes em que a biblioteca de testes tira uma "print" da tela e compara com os resultados esperados do teste
+      quando precisar atualizar a snapshot pode rodar o comando padrão de testes com a flag --watch ou --updateSnapshot
+   }
+
+   não é possível fazer o teste com hooks diretamente, por isso precisamos tirar a função a ser testada de dentro do hook e transformá-la em uma função pura para assim podermos testar
+   // usando @testing-library é possível fazer testes com hooks utilizando o método renderHook();
+
+   links {
+      renderizar hooks: https://testing-library.com/docs/react-testing-library/api/#renderhook
+   }
 }
