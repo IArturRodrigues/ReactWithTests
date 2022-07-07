@@ -1,16 +1,14 @@
-import { Form, Header, Footer, ParticipantList } from '@components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Configuration from './pages/Configuration';
+import Raffle from './pages/Raffle';
 
 export function Router (): JSX.Element {
    return (
       <BrowserRouter>
-         <Header />
          <Routes>
-            <Route path='/' element={<Form />}>
-               <Route index element={<ParticipantList />} />
-            </Route>
+            <Route path='/' element={<Configuration />} />
+            <Route path='/sorteio' element={<Raffle />} />
          </Routes>
-         <Footer />
       </BrowserRouter>
    );
 }
