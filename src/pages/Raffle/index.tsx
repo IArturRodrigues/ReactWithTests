@@ -15,8 +15,12 @@ function Raffle (): JSX.Element {
 
    function raffle (event: React.FormEvent<HTMLFormElement>) {
       event.preventDefault();
-      // if (!result.has(currentParticipant)) return;
-      setSecretFriend(result.get(currentParticipant)!);
+      if (result.has(currentParticipant)) {
+         setSecretFriend(result.get(currentParticipant)!);
+         setTimeout(() => {
+            setSecretFriend('');
+         }, 5000);
+      }
    }
 
    return (
@@ -31,6 +35,7 @@ function Raffle (): JSX.Element {
                   onChange={e => setCurrentParticipant(e.target.value)}
                   required
                >
+                  <option>Selecione seu nome!</option>
                   {participantList.map(participant => (
                      <option key={participant}>
                         {participant}

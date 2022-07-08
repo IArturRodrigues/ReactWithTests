@@ -56,7 +56,7 @@ usando jest {
    }
 }
 
-sobre testes {
+sobre testes no jest {
    Cada teste deve testar apenas 1 funcionalidade, só deve falhar por um único motivo que é não cumprir o requisito do teste. Não tente fazer mais do que apenas 1 teste dentro de cada bloco.
 
    usando mocks (valores de mentira) {
@@ -117,5 +117,111 @@ sobre testes {
 
    links {
       renderizar hooks: https://testing-library.com/docs/react-testing-library/api/#renderhook
+      lista de expectativas do jest: https://jestjs.io/pt-BR/docs/expect
+   }
+}
+
+quando for subir o projeto pra vercel, tem uma forma de caso algum teste nao passe ele nao deve colocar essa nova versão no ar.
+Para isso é preciso is nas configurações do projeto na vercel, mudar o comando de build para que ele seja primeiro o comando de testes e depois o de build
+
+
+consultas com jest e @testing-library {
+   Buscando elementos únicos:
+      getBy
+      queryBy
+      findBy
+
+   Buscando múltiplos elementos:
+      getAllBy
+      queryAllBy
+      findAllBy
+
+   exemplos de buscas {
+      ByLabelText {
+         getByLabelText, queryByLabelText, getAllByLabelText, queryAllByLabelText, findByLabelText, findAllByLabelText.
+
+         É uma alternativa quando, por exemplo, temos múltiplos inputs no mesmo componente. Nesse caso, podemos buscar o input pelo label associado a ela. Confira a seguir boas práticas para esse cenário:
+         html/jsx {
+            <label for="email-input">E-mail</label>
+            <input id="email-input" />
+
+            <label id="email-label">E-mail</label>
+            <input aria-labelledby="email-label" />
+
+            <label>E-mail <input /></label>
+
+            <label>
+            <span>E-mail</span>
+            <input />
+            </label>
+
+            <input aria-label="E-mail" />
+         }
+         Em qualquer um dos exemplos acima, podemos obter o input da seguinte forma:
+         arquivo de test {
+            const inputEmail = screen.getByLabelText(‘E-mail’);
+         }
+      }
+
+      ByPlaceholderText {
+         getByPlaceholderText, queryByPlaceholderText, getAllByPlaceholderText, queryAllByPlaceholderText, findByPlaceholderText, findAllByPlaceholderText
+
+         Aqui, estamos falando do atributo do html, que também podemos utilizar para buscar os elementos:
+         html/jsx {
+            <input placeholder="E-mail" />
+         }
+         E para buscar:
+         arquivo de test {
+            const inputEmail = screen.getByPlaceholderText(‘E-mail’);
+         }
+      }
+
+      ByText {
+         getByText, queryByText, getAllByText, queryAllByText, findByText, findAllByText
+
+         Agora, estamos falando do textContent dos elementos HTML. Então, para buscar uma âncora com essa marcação:
+         html/jsx {
+            <a href="/sobre">Sobre a Alura</a>
+         }
+         Escrevemos:
+         arquivo de test {
+            const ancoraSobre = screen.getByText(‘Sobre a Alura’);
+         }
+         É comum também o uso de Expressões Regulares para fazer buscas por texto. Essas expressões são tão poderosas e úteis que existe até um curso sobre elas.
+
+         link do curso {
+            https://www.alura.com.br/curso-online-expressoes-regulares
+         }
+      }
+
+      ByDisplayValue {
+         getByDisplayValue, queryByDisplayValue, getAllByDisplayValue, queryAllByDisplayValue, findByDisplayValue, findAllByDisplayValue
+
+         Podemos utilizar essa query para encontrar elementos do tipo input, textarea, ou select.
+
+         O “display value” é o valor em si do elemento.
+
+         Se liga aqui no exemplo:
+         html/jsx {
+            <input type="text" id="nome" value=’'Agarikov'’ />
+         }
+         Agora com o valor preenchido, podemos realizar a query:
+         arquivo de test {
+            const nomeInput = screen.getByDisplayValue('Agarikov’);
+         }
+      }
+
+      ByTestId {
+         getByTestId, queryByTestId, getAllByTestId, queryAllByTestId, findByTestId, findAllByTestId
+
+         Quando tudo mais falhar, podemos definir um atributo data-testid no elemento e utilizar esse tipo de query para encontrá-lo:
+         html/jsx {
+            <div data-testid="id-customizado" />
+         }
+         arquivo de test {
+            const elemento = screen.getByTestId(‘id-customizado');
+         }
+         Mas fique atento a isto, pois aqui estamos sem valor semântico nenhum. Isso prejudica leitores de tela e demais softwares de acessibilidade.
+      }
    }
 }

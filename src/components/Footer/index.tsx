@@ -23,7 +23,7 @@ function Footer (): JSX.Element {
          >
             Iniciar brincadeira
          </SFooter.Button>
-         <img src="/imgs/sacolas.pgn" alt="Sacolas de compras" />
+         <img src="/imgs/sacolas.png" alt="Sacolas de compras" />
       </SFooter>
    );
 }

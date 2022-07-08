@@ -4,6 +4,7 @@ function Configuration (): JSX.Element {
    return (
       <Card>
          <section>
+            <h2>Vamos começar!</h2>
             <Form />
             <ParticipantList />
             <Footer />

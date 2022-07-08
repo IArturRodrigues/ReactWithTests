@@ -6,6 +6,9 @@ exports[`<Config /> page deve ser renderizada corretamente 1`] = `
     class="sc-iBkjds dtjPbl"
   >
     <section>
+      <h2>
+        Vamos começar!
+      </h2>
       <form
         class="sc-bczRLJ egmMGi"
       >
@@ -34,7 +37,7 @@ exports[`<Config /> page deve ser renderizada corretamente 1`] = `
         </button>
         <img
           alt="Sacolas de compras"
-          src="/imgs/sacolas.pgn"
+          src="/imgs/sacolas.png"
         />
       </footer>
     </section>

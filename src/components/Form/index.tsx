@@ -32,7 +32,7 @@ function Form (): JSX.Element {
             onChange={(e) => setText(e.target.value)}
             ref={inputRef}
          />
-         <SForm.Button disabled={text.length === 0 ?? false} >
+         <SForm.Button disabled={text.length === 0} >
             Adicionar
          </SForm.Button>
          {errorMessage && <SForm.AlertError role='alert'>{errorMessage}</SForm.AlertError>}

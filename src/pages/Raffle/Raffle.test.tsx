@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 import { useParticipantList } from '@hooks/useParticipantList';
 import { useRaffleResult } from '@hooks/useRaffleResult';
@@ -44,13 +44,13 @@ describe('<Raffle /> page', () => {
    });
 
    test('todos os participantes podem exibir seu amigo secreto', () => {
-      expect(options).toHaveLength(participants.length);
+      expect(options).toHaveLength(participants.length + 1);
    });
 
    test('o amigo secreto é exibido quando solicitado', () => {
       fireEvent.change(select, {
-         targe: {
-            value: participants[0]
+         target: {
+            value: participants[1]
          }
       });
 
@@ -59,5 +59,25 @@ describe('<Raffle /> page', () => {
       const secretFriend = screen.getByRole('alert');
 
       expect(secretFriend).toBeInTheDocument();
+   });
+
+   test('esconde o amigo secreto sorteado depois de 5 segundos', () => {
+      jest.useFakeTimers();
+
+      fireEvent.change(select, {
+         target: {
+            value: participants[0]
+         }
+      });
+
+      fireEvent.click(button);
+
+      const secretFriend = screen.getByRole('alert');
+
+      act(() => {
+         jest.runAllTimers();
+      });
+
+      expect(secretFriend).not.toBeInTheDocument();
    });
 });
